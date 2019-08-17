@@ -48,10 +48,11 @@ public class ArrayStorage {
             Resume r = storage[i];
             if (Objects.equals(r.getUuid(), uuid)) {
                 System.arraycopy(storage, i + 1, storage, i, size - i - 1);
-                storage[size] = null;
+                storage[size-1] = null;
+                size--;
+                return;
             }
         }
-        size--;
     }
 
     /**
