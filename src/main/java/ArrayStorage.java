@@ -45,10 +45,9 @@ public class ArrayStorage {
         Objects.requireNonNull(uuid, "uuid is null");
 
         for (int i = 0; i < size; i++) {
-            Resume r = storage[i];
-            if (Objects.equals(r.getUuid(), uuid)) {
-                System.arraycopy(storage, i + 1, storage, i, size - i - 1);
-                storage[size-1] = null;
+            if (uuid.equals(storage[i].getUuid())) {
+                storage[i] = storage[size - 1];
+                storage[size - 1] = null;
                 size--;
                 return;
             }
