@@ -24,6 +24,12 @@ public class ArrayStorage {
     public void save(Resume r) {
         Objects.requireNonNull(r, "Parameter is null");
 
+        int index = indexOf(r.getUuid());
+        if (index >= 0) {
+            System.out.println("There is the resume in the storage already: " + index);
+            return;
+        }
+
         if (size >= storage.length) {
             throw new IllegalStateException("Storage is full");
         }
