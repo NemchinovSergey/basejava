@@ -6,9 +6,11 @@ import java.util.Objects;
  */
 public class ArrayStorage {
 
-    private static final int CAPACITY = 10000;
+    private static final int CAPACITY = 10_000;
     private static final Resume[] storage = new Resume[CAPACITY];
     private int size = 0;
+
+    private static final int NOT_FOUND = -1;
 
     public int getCapacity() {
         return CAPACITY;
@@ -32,26 +34,38 @@ public class ArrayStorage {
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
-        for (int i = 0; i < size; i++) {
-            Resume r = storage[i];
-            if (Objects.equals(r.getUuid(), uuid)) {
-                return r;
-            }
+        int index = indexOf(uuid);
+        if (index == NOT_FOUND) {
+            System.out.println("Not found: " + uuid);
+            return null;
+        } else {
+            System.out.println("Resume found: " + uuid);
+            return storage[index];
         }
-        return null;
     }
 
     public void delete(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                return;
+        int index = indexOf(uuid);
+        if (index == NOT_FOUND) {
+            System.out.println("Not found: " + uuid);
+        } else {
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
+            System.out.println("Resume deleted: " + uuid);
+        }
+    }
+
+    private int indexOf(String uuid) {
+        for (int index = 0; index < size; index++) {
+            Resume r = storage[index];
+            if (Objects.equals(r.getUuid(), uuid)) {
+                return index;
             }
         }
+        return NOT_FOUND;
     }
 
     /**
