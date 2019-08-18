@@ -31,7 +31,7 @@ public class ArrayStorage {
             return;
         }
 
-        if (size >= storage.length) {
+        if (size >= CAPACITY) {
             throw new IllegalStateException("Storage is full");
         }
 
