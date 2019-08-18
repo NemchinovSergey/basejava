@@ -2,9 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -92,5 +90,15 @@ class ArrayStorageTest {
         assertEquals("Storage is full", exception.getMessage());
     }
 
+    @Test
+    void testSaveDuplicates() {
+        String uuid = "uuid10";
+        assertNotNull(ARRAY_STORAGE.get(uuid));
+
+        int size = ARRAY_STORAGE.size();
+        ARRAY_STORAGE.save(new Resume(uuid));
+        assertNotNull(ARRAY_STORAGE.get(uuid));
+        assertEquals(size, ARRAY_STORAGE.size());
+    }
 
 }
