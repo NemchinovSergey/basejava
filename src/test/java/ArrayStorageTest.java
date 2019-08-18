@@ -8,7 +8,7 @@ import org.junit.jupiter.api.function.Executable;
 
 class ArrayStorageTest {
 
-    private static ArrayStorage ARRAY_STORAGE;
+    private static Storage ARRAY_STORAGE;
 
     private static final int INITIAL_SIZE = 1000;
 

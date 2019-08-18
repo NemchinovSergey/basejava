@@ -4,7 +4,7 @@ import java.util.Objects;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
+public class ArrayStorage implements Storage {
 
     private static final int CAPACITY = 10_000;
     private static final Resume[] storage = new Resume[CAPACITY];
@@ -12,16 +12,19 @@ public class ArrayStorage {
 
     private static final int NOT_FOUND = -1;
 
+    @Override
     public int getCapacity() {
         return CAPACITY;
     }
 
+    @Override
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
         System.out.println("Storage is clear");
     }
 
+    @Override
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Parameter is null");
 
@@ -38,6 +41,7 @@ public class ArrayStorage {
         storage[size++] = resume;
     }
 
+    @Override
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
@@ -51,6 +55,7 @@ public class ArrayStorage {
         }
     }
 
+    @Override
     public void delete(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
@@ -65,6 +70,7 @@ public class ArrayStorage {
         }
     }
 
+    @Override
     public void update(Resume resume) {
         Objects.requireNonNull(resume, "uuid is null");
 
@@ -87,13 +93,12 @@ public class ArrayStorage {
         return NOT_FOUND;
     }
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
+    @Override
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
+    @Override
     public int size() {
         return size;
     }
