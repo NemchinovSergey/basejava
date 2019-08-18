@@ -82,11 +82,13 @@ class ArrayStorageTest {
     }
 
     @Test
-    void testOverloading() {
-        Executable executable = () -> IntStream.range(0, ARRAY_STORAGE.getCapacity() + 1)
-                                               .forEach(n -> ARRAY_STORAGE.save(new Resume("uuid" + n)));
-        Exception exception = assertThrows(IllegalStateException.class,
-                                           executable);
+    void testStorageOverflow() {
+        Executable fillStorage = () -> {
+            ARRAY_STORAGE.clear();
+            IntStream.range(0, ARRAY_STORAGE.getCapacity() + 1).forEach(n -> ARRAY_STORAGE.save(new Resume(
+                    "uuid" + n)));
+        };
+        Exception exception = assertThrows(IllegalStateException.class, fillStorage);
         assertEquals("Storage is full", exception.getMessage());
     }
 

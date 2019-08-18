@@ -19,6 +19,7 @@ public class ArrayStorage {
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
+        System.out.println("Storage is clear");
     }
 
     public void save(Resume r) {
