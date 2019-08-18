@@ -1,3 +1,9 @@
+package com.nsergey.basejava;
+
+import com.nsergey.basejava.model.Resume;
+import com.nsergey.basejava.storage.ArrayStorage;
+import com.nsergey.basejava.storage.Storage;
+
 /**
  * Test for your ArrayStorage implementation
  */

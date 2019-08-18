@@ -1,6 +1,12 @@
+package com.nsergey.basejava;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import com.nsergey.basejava.model.Resume;
+import com.nsergey.basejava.storage.ArrayStorage;
+import com.nsergey.basejava.storage.Storage;
 
 /**
  * Interactive test for ArrayStorage implementation

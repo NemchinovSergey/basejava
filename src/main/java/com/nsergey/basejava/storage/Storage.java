@@ -1,3 +1,7 @@
+package com.nsergey.basejava.storage;
+
+import com.nsergey.basejava.model.Resume;
+
 /**
  * Storage Interface
  */

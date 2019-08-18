@@ -1,3 +1,5 @@
+package com.nsergey.basejava.model;
+
 import java.util.Objects;
 
 /**
