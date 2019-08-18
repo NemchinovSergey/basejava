@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * Initial resume class
  */
@@ -7,7 +9,7 @@ public class Resume {
     private String uuid;
 
     public Resume(String uuid) {
-        this.uuid = uuid;
+        this.uuid = Objects.requireNonNull(uuid, "uuid is null");
     }
 
     public String getUuid() {
