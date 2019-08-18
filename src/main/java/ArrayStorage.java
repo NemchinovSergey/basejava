@@ -65,6 +65,18 @@ public class ArrayStorage {
         }
     }
 
+    public void update(Resume resume) {
+        Objects.requireNonNull(resume, "uuid is null");
+
+        int index = indexOf(resume.getUuid());
+        if (index == NOT_FOUND) {
+            System.out.println("Not found: " + resume.getUuid());
+        } else {
+            storage[index] = resume;
+            System.out.println("Resume updated: " + index);
+        }
+    }
+
     private int indexOf(String uuid) {
         for (int index = 0; index < size; index++) {
             Resume r = storage[index];

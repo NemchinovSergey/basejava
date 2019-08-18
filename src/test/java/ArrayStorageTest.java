@@ -103,4 +103,16 @@ class ArrayStorageTest {
         assertEquals(size, ARRAY_STORAGE.size());
     }
 
+    @Test
+    void update() {
+        String uuid = "uuid10";
+        Resume oldResume = ARRAY_STORAGE.get(uuid);
+        assertNotNull(oldResume);
+
+        Resume newResume = new Resume(uuid);
+        ARRAY_STORAGE.update(newResume);
+
+        assertNotSame(oldResume, newResume);
+        assertSame(newResume, ARRAY_STORAGE.get(uuid));
+    }
 }
