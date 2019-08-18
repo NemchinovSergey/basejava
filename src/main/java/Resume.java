@@ -5,8 +5,8 @@ import java.util.Objects;
  */
 public class Resume {
 
-    // Unique identifier
-    private String uuid;
+    /** Unique identifier of Resume */
+    private final String uuid;
 
     public Resume(String uuid) {
         this.uuid = Objects.requireNonNull(uuid, "uuid is null");
@@ -16,8 +16,23 @@ public class Resume {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Resume resume = (Resume) o;
+
+        return Objects.equals(uuid, resume.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid != null ? uuid.hashCode() : 0;
     }
 
     @Override
