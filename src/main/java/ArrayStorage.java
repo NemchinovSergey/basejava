@@ -22,10 +22,10 @@ public class ArrayStorage {
         System.out.println("Storage is clear");
     }
 
-    public void save(Resume r) {
-        Objects.requireNonNull(r, "Parameter is null");
+    public void save(Resume resume) {
+        Objects.requireNonNull(resume, "Parameter is null");
 
-        int index = indexOf(r.getUuid());
+        int index = indexOf(resume.getUuid());
         if (index >= 0) {
             System.out.println("There is the resume in the storage already: " + index);
             return;
@@ -35,7 +35,7 @@ public class ArrayStorage {
             throw new IllegalStateException("Storage is full");
         }
 
-        storage[size++] = r;
+        storage[size++] = resume;
     }
 
     public Resume get(String uuid) {
