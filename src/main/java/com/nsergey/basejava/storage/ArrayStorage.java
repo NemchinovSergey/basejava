@@ -1,6 +1,5 @@
 package com.nsergey.basejava.storage;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import com.nsergey.basejava.model.Resume;
@@ -11,15 +10,8 @@ import com.nsergey.basejava.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-        System.out.println("Storage is clear");
-    }
-
-    @Override
     public void save(Resume resume) {
-        Objects.requireNonNull(resume, "Parameter is null");
+        Objects.requireNonNull(resume, "Resume is null");
 
         int index = indexOf(resume.getUuid());
         if (index >= 0) {
@@ -71,16 +63,6 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return NOT_FOUND;
-    }
-
-    @Override
-    public int getCapacity() {
-        return CAPACITY;
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
     }
 
 }

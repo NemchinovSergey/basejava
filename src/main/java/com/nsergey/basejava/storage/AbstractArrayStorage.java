@@ -1,5 +1,6 @@
 package com.nsergey.basejava.storage;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import com.nsergey.basejava.model.Resume;
@@ -29,6 +30,20 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public int size() {
         return size;
+    }
+
+    public void clear() {
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
+        System.out.println("Storage is clear");
+    }
+
+    public int getCapacity() {
+        return CAPACITY;
+    }
+
+    public Resume[] getAll() {
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     protected abstract int indexOf(String uuid);
