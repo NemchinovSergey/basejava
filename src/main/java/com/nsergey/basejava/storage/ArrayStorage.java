@@ -8,18 +8,7 @@ import com.nsergey.basejava.model.Resume;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage implements Storage {
-
-    private static final int CAPACITY = 10_000;
-    private static final Resume[] storage = new Resume[CAPACITY];
-    private int size = 0;
-
-    private static final int NOT_FOUND = -1;
-
-    @Override
-    public int getCapacity() {
-        return CAPACITY;
-    }
+public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void clear() {
@@ -43,20 +32,6 @@ public class ArrayStorage implements Storage {
         }
 
         storage[size++] = resume;
-    }
-
-    @Override
-    public Resume get(String uuid) {
-        Objects.requireNonNull(uuid, "uuid is null");
-
-        int index = indexOf(uuid);
-        if (index == NOT_FOUND) {
-            System.out.println("Not found: " + uuid);
-            return null;
-        } else {
-            System.out.println("Resume found: " + uuid);
-            return storage[index];
-        }
     }
 
     @Override
@@ -87,7 +62,8 @@ public class ArrayStorage implements Storage {
         }
     }
 
-    private int indexOf(String uuid) {
+    @Override
+    protected int indexOf(String uuid) {
         for (int index = 0; index < size; index++) {
             Resume r = storage[index];
             if (Objects.equals(r.getUuid(), uuid)) {
@@ -98,13 +74,13 @@ public class ArrayStorage implements Storage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+    public int getCapacity() {
+        return CAPACITY;
     }
 
     @Override
-    public int size() {
-        return size;
+    public Resume[] getAll() {
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
 }
