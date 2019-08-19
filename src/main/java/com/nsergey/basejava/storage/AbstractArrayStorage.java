@@ -15,6 +15,22 @@ public abstract class AbstractArrayStorage implements Storage {
     protected Resume[] storage = new Resume[CAPACITY];
     protected int size = 0;
 
+    public void save(Resume resume) {
+        Objects.requireNonNull(resume, "Resume is null");
+
+        int index = indexOf(resume.getUuid());
+        if (index >= 0) {
+            System.out.println("There is the resume in the storage already: " + index);
+            return;
+        }
+
+        if (size >= CAPACITY) {
+            throw new IllegalStateException("Storage is full");
+        }
+
+        add(resume);
+    }
+
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
@@ -46,5 +62,20 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
+    public void update(Resume resume) {
+        Objects.requireNonNull(resume, "uuid is null");
+
+        int index = indexOf(resume.getUuid());
+        if (index == NOT_FOUND) {
+            System.out.println("Not found: " + resume.getUuid());
+        } else {
+            storage[index] = resume;
+            System.out.println("Resume updated: " + index);
+        }
+    }
+
     protected abstract int indexOf(String uuid);
+
+    protected abstract void add(Resume resume);
+
 }

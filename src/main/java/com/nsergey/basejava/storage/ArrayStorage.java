@@ -10,23 +10,6 @@ import com.nsergey.basejava.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void save(Resume resume) {
-        Objects.requireNonNull(resume, "Resume is null");
-
-        int index = indexOf(resume.getUuid());
-        if (index >= 0) {
-            System.out.println("There is the resume in the storage already: " + index);
-            return;
-        }
-
-        if (size >= CAPACITY) {
-            throw new IllegalStateException("Storage is full");
-        }
-
-        storage[size++] = resume;
-    }
-
-    @Override
     public void delete(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
@@ -42,19 +25,6 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    public void update(Resume resume) {
-        Objects.requireNonNull(resume, "uuid is null");
-
-        int index = indexOf(resume.getUuid());
-        if (index == NOT_FOUND) {
-            System.out.println("Not found: " + resume.getUuid());
-        } else {
-            storage[index] = resume;
-            System.out.println("Resume updated: " + index);
-        }
-    }
-
-    @Override
     protected int indexOf(String uuid) {
         for (int index = 0; index < size; index++) {
             Resume r = storage[index];
@@ -63,6 +33,12 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return NOT_FOUND;
+    }
+
+    @Override
+    protected void add(Resume resume) {
+        storage[size] = resume;
+        size++;
     }
 
 }
