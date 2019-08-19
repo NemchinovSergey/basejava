@@ -81,7 +81,7 @@ class ArrayStorageTest {
         Exception exception;
 
         exception = assertThrows(NullPointerException.class, () -> ARRAY_STORAGE.save(null));
-        assertEquals("Parameter is null", exception.getMessage());
+        assertEquals("Resume is null", exception.getMessage());
 
         exception = assertThrows(NullPointerException.class, () -> ARRAY_STORAGE.get(null));
         assertEquals("uuid is null", exception.getMessage());
