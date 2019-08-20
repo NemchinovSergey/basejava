@@ -3,7 +3,6 @@ package com.nsergey.basejava.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import com.nsergey.basejava.exception.ExistStorageException;
+import com.nsergey.basejava.exception.NotExistStorageException;
+import com.nsergey.basejava.exception.StorageException;
 import com.nsergey.basejava.model.Resume;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,7 +52,7 @@ class SortedArrayStorageTest {
     @Test
     void save() {
         String uuid = "some-test-uuid";
-        assertNull(ARRAY_STORAGE.get(uuid));
+        assertThrows(NotExistStorageException.class, () -> ARRAY_STORAGE.get(uuid));
 
         ARRAY_STORAGE.save(new Resume(uuid));
 
@@ -71,7 +73,7 @@ class SortedArrayStorageTest {
 
         ARRAY_STORAGE.delete(uuid);
 
-        assertNull(ARRAY_STORAGE.get(uuid));
+        assertThrows(NotExistStorageException.class, () -> ARRAY_STORAGE.get(uuid));
         assertEquals(size - 1, ARRAY_STORAGE.size());
     }
 
@@ -108,7 +110,7 @@ class SortedArrayStorageTest {
             IntStream.range(0, ARRAY_STORAGE.getCapacity() + 1).forEach(n -> ARRAY_STORAGE.save(new Resume(
                     "uuid" + n)));
         };
-        Exception exception = assertThrows(IllegalStateException.class, fillStorage);
+        Exception exception = assertThrows(StorageException.class, fillStorage);
         assertEquals("Storage is full", exception.getMessage());
     }
 
@@ -118,7 +120,8 @@ class SortedArrayStorageTest {
         assertNotNull(ARRAY_STORAGE.get(uuid));
 
         int size = ARRAY_STORAGE.size();
-        ARRAY_STORAGE.save(new Resume(uuid));
+
+        assertThrows(ExistStorageException.class, () -> ARRAY_STORAGE.save(new Resume(uuid)));
         assertNotNull(ARRAY_STORAGE.get(uuid));
         assertEquals(size, ARRAY_STORAGE.size());
     }
