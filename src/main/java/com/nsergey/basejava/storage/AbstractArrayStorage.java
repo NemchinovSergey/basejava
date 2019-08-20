@@ -3,6 +3,9 @@ package com.nsergey.basejava.storage;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.nsergey.basejava.exception.ExistStorageException;
+import com.nsergey.basejava.exception.NotExistStorageException;
+import com.nsergey.basejava.exception.StorageException;
 import com.nsergey.basejava.model.Resume;
 
 /**
@@ -20,12 +23,11 @@ public abstract class AbstractArrayStorage implements Storage {
 
         int index = indexOf(resume.getUuid());
         if (index >= 0) {
-            System.out.println("There is the resume in the storage already: " + index);
-            return;
+            throw new ExistStorageException(resume.getUuid());
         }
 
         if (size >= CAPACITY) {
-            throw new IllegalStateException("Storage is full");
+            throw new StorageException(resume.getUuid(), "Storage is full");
         }
 
         add(resume);
@@ -36,10 +38,8 @@ public abstract class AbstractArrayStorage implements Storage {
 
         int index = indexOf(uuid);
         if (index == NOT_FOUND) {
-            System.out.println("Not found: " + uuid);
-            return null;
+            throw new NotExistStorageException(uuid);
         } else {
-            System.out.println("Resume found: " + uuid);
             return storage[index];
         }
     }
@@ -51,7 +51,6 @@ public abstract class AbstractArrayStorage implements Storage {
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
-        System.out.println("Storage is clear");
     }
 
     public int getCapacity() {
@@ -67,10 +66,9 @@ public abstract class AbstractArrayStorage implements Storage {
 
         int index = indexOf(resume.getUuid());
         if (index == NOT_FOUND) {
-            System.out.println("Not found: " + resume.getUuid());
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
-            System.out.println("Resume updated: " + index);
         }
     }
 
