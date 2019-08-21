@@ -12,7 +12,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void delete(String uuid) {
-        Objects.requireNonNull(uuid, "uuid is null");
+        Objects.requireNonNull(uuid, "Resume is null");
 
         int index = indexOf(uuid);
         if (index == NOT_FOUND) {
