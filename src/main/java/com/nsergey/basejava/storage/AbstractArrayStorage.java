@@ -11,7 +11,7 @@ import com.nsergey.basejava.model.Resume;
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int CAPACITY = 10000;
     protected static final int NOT_FOUND = -1;
 
