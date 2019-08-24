@@ -5,11 +5,6 @@ import com.nsergey.basejava.model.Resume;
 public class MapStorage extends AbstractStorage {
 
     @Override
-    public int getCapacity() {
-        return 0;
-    }
-
-    @Override
     public void clear() {
 
     }
@@ -30,7 +25,27 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
+    protected void delete(int index) {
+
+    }
+
+    @Override
     public void update(Resume resume) {
+
+    }
+
+    @Override
+    protected Resume get(int index) {
+        return null;
+    }
+
+    @Override
+    protected int indexOf(String uuid) {
+        return 0;
+    }
+
+    @Override
+    protected void add(Resume resume) {
 
     }
 
