@@ -3,7 +3,6 @@ package com.nsergey.basejava.storage;
 import java.util.Arrays;
 import java.util.Objects;
 
-import com.nsergey.basejava.exception.ExistStorageException;
 import com.nsergey.basejava.exception.NotExistStorageException;
 import com.nsergey.basejava.exception.StorageException;
 import com.nsergey.basejava.model.Resume;
@@ -13,7 +12,6 @@ import com.nsergey.basejava.model.Resume;
  */
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int CAPACITY = 10000;
-    protected static final int NOT_FOUND = -1;
 
     protected Resume[] storage = new Resume[CAPACITY];
     protected int size = 0;
@@ -21,27 +19,16 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
 
-        int index = indexOf(resume.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        }
-
         if (size >= CAPACITY) {
             throw new StorageException(resume.getUuid(), "Storage is full");
         }
 
-        add(resume);
+        super.save(resume);
     }
 
-    public Resume get(String uuid) {
-        Objects.requireNonNull(uuid, "uuid is null");
-
-        int index = indexOf(uuid);
-        if (index == NOT_FOUND) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            return storage[index];
-        }
+    @Override
+    protected Resume get(int index) {
+        return storage[index];
     }
 
     public int size() {
@@ -71,9 +58,5 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
             storage[index] = resume;
         }
     }
-
-    protected abstract int indexOf(String uuid);
-
-    protected abstract void add(Resume resume);
 
 }

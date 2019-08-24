@@ -25,14 +25,14 @@ public abstract class AbstractArrayStorageTest {
 
     private static final int INITIAL_SIZE = 1000;
 
-    private Storage storage;
+    private AbstractArrayStorage storage;
 
     // sorted array of resumes
     private static final Resume[] resumesArr = IntStream.range(1, INITIAL_SIZE + 1)
                                                         .mapToObj(n -> new Resume("uuid" + n))
                                                         .toArray(Resume[]::new);
 
-    AbstractArrayStorageTest(Storage storage) {
+    AbstractArrayStorageTest(AbstractArrayStorage storage) {
         this.storage = storage;
     }
 

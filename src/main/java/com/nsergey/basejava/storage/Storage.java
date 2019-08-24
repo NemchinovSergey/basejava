@@ -6,7 +6,6 @@ import com.nsergey.basejava.model.Resume;
  * Storage Interface
  */
 public interface Storage {
-    int getCapacity();
 
     void clear();
 

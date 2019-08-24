@@ -2,7 +2,6 @@ package com.nsergey.basejava.storage;
 
 import java.util.Objects;
 
-import com.nsergey.basejava.exception.NotExistStorageException;
 import com.nsergey.basejava.model.Resume;
 
 /**
@@ -11,17 +10,10 @@ import com.nsergey.basejava.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void delete(String uuid) {
-        Objects.requireNonNull(uuid, "Resume is null");
-
-        int index = indexOf(uuid);
-        if (index == NOT_FOUND) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        }
+    protected void delete(int index) {
+        storage[index] = storage[size - 1];
+        storage[size - 1] = null;
+        size--;
     }
 
     @Override
