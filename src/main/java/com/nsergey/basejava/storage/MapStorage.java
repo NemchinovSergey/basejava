@@ -5,32 +5,17 @@ import com.nsergey.basejava.model.Resume;
 public class MapStorage extends AbstractStorage {
 
     @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public void save(Resume resume) {
-
-    }
-
-    @Override
-    public Resume get(String uuid) {
+    protected Object getSearchKey(String uuid) {
         return null;
     }
 
     @Override
-    public void delete(String uuid) {
-
+    protected boolean isExist(Object key) {
+        return false;
     }
 
     @Override
-    protected void doDelete(Object key) {
-
-    }
-
-    @Override
-    public void update(Resume resume) {
+    protected void doAdd(Resume resume, Object key) {
 
     }
 
@@ -40,13 +25,13 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doAdd(Resume resume, Object key) {
+    protected void doUpdate(Resume resume, Object key) {
 
     }
 
     @Override
-    public Resume[] getAll() {
-        return new Resume[0];
+    protected void doDelete(Object key) {
+
     }
 
     @Override
@@ -55,17 +40,12 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object key) {
-        return false;
+    public void clear() {
+
     }
 
     @Override
-    protected Object getSearchKey(String uuid) {
-        return null;
-    }
-
-    @Override
-    protected void doUpdate(Resume resume, Object key) {
-
+    public Resume[] getAll() {
+        return new Resume[0];
     }
 }
