@@ -8,6 +8,7 @@ import com.nsergey.basejava.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
+    @Override
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
 
@@ -21,6 +22,7 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract boolean isExist(Object key);
 
+    @Override
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
@@ -32,6 +34,7 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
+    @Override
     public void delete(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
@@ -45,12 +48,16 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void doDelete(Object key);
 
+    @Override
     public abstract int size();
 
+    @Override
     public abstract void clear();
 
+    @Override
     public abstract Resume[] getAll();
 
+    @Override
     public abstract void update(Resume resume);
 
     protected abstract Resume doGet(Object key);

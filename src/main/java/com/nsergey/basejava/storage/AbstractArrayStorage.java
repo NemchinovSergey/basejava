@@ -17,6 +17,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected final Resume[] storage = new Resume[CAPACITY];
     protected int size = 0;
 
+    @Override
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
 
@@ -32,10 +33,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return storage[(Integer) key];
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
@@ -45,10 +48,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return CAPACITY;
     }
 
+    @Override
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
+    @Override
     public void update(Resume resume) {
         Objects.requireNonNull(resume, "uuid is null");
 
