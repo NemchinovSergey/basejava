@@ -7,7 +7,15 @@ import com.nsergey.basejava.model.Resume;
 
 public class ListStorage extends AbstractStorage {
 
-    private List<Resume> storage = new ArrayList<>();
+    private final List<Resume> storage;
+
+    public ListStorage() {
+        this.storage = new ArrayList<>();
+    }
+
+    public ListStorage(List<Resume> storage) {
+        this.storage = storage;
+    }
 
     @Override
     protected Resume doGet(Object key) {
