@@ -8,6 +8,27 @@ import com.nsergey.basejava.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
+    protected abstract Object getSearchKey(String uuid);
+
+    protected abstract boolean isExist(Object key);
+
+    protected abstract void doAdd(Resume resume, Object key);
+
+    protected abstract Resume doGet(Object key);
+
+    protected abstract void doUpdate(Resume resume, Object key);
+
+    protected abstract void doDelete(Object key);
+
+    @Override
+    public abstract int size();
+
+    @Override
+    public abstract void clear();
+
+    @Override
+    public abstract Resume[] getAll();
+
     @Override
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
@@ -20,8 +41,6 @@ public abstract class AbstractStorage implements Storage {
         doAdd(resume, key);
     }
 
-    protected abstract boolean isExist(Object key);
-
     @Override
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
@@ -31,18 +50,6 @@ public abstract class AbstractStorage implements Storage {
             throw new NotExistStorageException(uuid);
         } else {
             return doGet(key);
-        }
-    }
-
-    @Override
-    public void delete(String uuid) {
-        Objects.requireNonNull(uuid, "uuid is null");
-
-        Object key = getSearchKey(uuid);
-        if (!isExist(key)) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            doDelete(key);
         }
     }
 
@@ -58,24 +65,16 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    protected abstract void doUpdate(Resume resume, Object key);
-
-    protected abstract void doDelete(Object key);
-
     @Override
-    public abstract int size();
+    public void delete(String uuid) {
+        Objects.requireNonNull(uuid, "uuid is null");
 
-    @Override
-    public abstract void clear();
-
-    @Override
-    public abstract Resume[] getAll();
-
-    protected abstract Resume doGet(Object key);
-
-    protected abstract Object getSearchKey(String uuid);
-
-    protected abstract void doAdd(Resume resume, Object key);
-
+        Object key = getSearchKey(uuid);
+        if (!isExist(key)) {
+            throw new NotExistStorageException(uuid);
+        } else {
+            doDelete(key);
+        }
+    }
 
 }

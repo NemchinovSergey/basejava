@@ -10,6 +10,12 @@ import com.nsergey.basejava.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
+    protected void doAdd(Resume resume, Object key) {
+        storage[size] = resume;
+        size++;
+    }
+
+    @Override
     protected void doDelete(Object key) {
         storage[(int) key] = storage[size - 1];
         storage[size - 1] = null;
@@ -25,12 +31,6 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return NOT_FOUND;
-    }
-
-    @Override
-    protected void doAdd(Resume resume, Object key) {
-        storage[size] = resume;
-        size++;
     }
 
 }

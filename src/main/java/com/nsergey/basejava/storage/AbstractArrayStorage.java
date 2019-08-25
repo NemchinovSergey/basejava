@@ -16,6 +16,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected final Resume[] storage = new Resume[CAPACITY];
     protected int size = 0;
 
+    protected abstract int indexOf(String uuid);
+
+    public int getCapacity() {
+        return CAPACITY;
+    }
+
     @Override
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
@@ -25,6 +31,16 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         }
 
         super.save(resume);
+    }
+
+    @Override
+    protected Object getSearchKey(String uuid) {
+        return indexOf(uuid);
+    }
+
+    @Override
+    protected boolean isExist(Object key) {
+        return key == null || (Integer) key >= 0;
     }
 
     @Override
@@ -48,25 +64,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    public int getCapacity() {
-        return CAPACITY;
-    }
-
     @Override
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
-    }
-
-    @Override
-    protected Object getSearchKey(String uuid) {
-        return indexOf(uuid);
-    }
-
-    protected abstract int indexOf(String uuid);
-
-    @Override
-    protected boolean isExist(Object key) {
-        return key == null || (Integer) key >= 0;
     }
 
 }
