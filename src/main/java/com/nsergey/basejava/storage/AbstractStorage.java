@@ -33,7 +33,7 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void delete(String uuid) {
-        Objects.requireNonNull(uuid, "Resume is null");
+        Objects.requireNonNull(uuid, "uuid is null");
 
         int index = indexOf(uuid);
         if (index == NOT_FOUND) {

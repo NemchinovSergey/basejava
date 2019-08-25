@@ -104,7 +104,7 @@ public abstract class AbstractArrayStorageTest {
         assertEquals("uuid is null", exception.getMessage());
 
         exception = assertThrows(NullPointerException.class, () -> storage.delete(null));
-        assertEquals("Resume is null", exception.getMessage());
+        assertEquals("uuid is null", exception.getMessage());
     }
 
     @Test
