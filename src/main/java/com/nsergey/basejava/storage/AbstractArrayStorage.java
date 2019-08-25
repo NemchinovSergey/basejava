@@ -3,7 +3,6 @@ package com.nsergey.basejava.storage;
 import java.util.Arrays;
 import java.util.Objects;
 
-import com.nsergey.basejava.exception.NotExistStorageException;
 import com.nsergey.basejava.exception.StorageException;
 import com.nsergey.basejava.model.Resume;
 
@@ -34,6 +33,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
+    protected void doUpdate(Resume resume, Object key) {
+        storage[(int) key] = resume;
+    }
+
+    @Override
     public int size() {
         return size;
     }
@@ -51,18 +55,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
-    }
-
-    @Override
-    public void update(Resume resume) {
-        Objects.requireNonNull(resume, "uuid is null");
-
-        int index = indexOf(resume.getUuid());
-        if (index == NOT_FOUND) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            storage[index] = resume;
-        }
     }
 
     @Override

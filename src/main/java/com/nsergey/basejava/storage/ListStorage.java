@@ -2,9 +2,7 @@ package com.nsergey.basejava.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import com.nsergey.basejava.exception.NotExistStorageException;
 import com.nsergey.basejava.model.Resume;
 
 public class ListStorage extends AbstractStorage {
@@ -27,16 +25,9 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void update(Resume resume) {
-        Objects.requireNonNull(resume, "uuid is null");
-
-        int index = (int) getSearchKey(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            storage.remove(index);
-            storage.add(resume);
-        }
+    protected void doUpdate(Resume resume, Object key) {
+        storage.remove((int)key);
+        storage.add(resume);
     }
 
     @Override

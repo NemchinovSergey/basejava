@@ -63,4 +63,9 @@ public class MapStorage extends AbstractStorage {
     protected Object getSearchKey(String uuid) {
         return null;
     }
+
+    @Override
+    protected void doUpdate(Resume resume, Object key) {
+
+    }
 }

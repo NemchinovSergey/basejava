@@ -46,6 +46,20 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
+    @Override
+    public void update(Resume resume) {
+        Objects.requireNonNull(resume, "uuid is null");
+
+        Object key = getSearchKey(resume.getUuid());
+        if (!isExist(key)) {
+            throw new NotExistStorageException(resume.getUuid());
+        } else {
+            doUpdate(resume, key);
+        }
+    }
+
+    protected abstract void doUpdate(Resume resume, Object key);
+
     protected abstract void doDelete(Object key);
 
     @Override
@@ -56,9 +70,6 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public abstract Resume[] getAll();
-
-    @Override
-    public abstract void update(Resume resume);
 
     protected abstract Resume doGet(Object key);
 
