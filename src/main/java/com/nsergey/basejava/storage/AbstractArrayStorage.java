@@ -14,7 +14,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int CAPACITY = 10000;
     protected static final int NOT_FOUND = -1;
 
-    protected Resume[] storage = new Resume[CAPACITY];
+    protected final Resume[] storage = new Resume[CAPACITY];
     protected int size = 0;
 
     public void save(Resume resume) {
