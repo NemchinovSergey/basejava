@@ -26,11 +26,11 @@ public abstract class AbstractStorage implements Storage {
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
-        int index = indexOf(uuid);
-        if (index == NOT_FOUND) {
+        Object key = getSearchKey(uuid);
+        if (!isExist(key)) {
             throw new NotExistStorageException(uuid);
         } else {
-            return get(index);
+            return doGet(key);
         }
     }
 
@@ -55,7 +55,7 @@ public abstract class AbstractStorage implements Storage {
 
     public abstract void update(Resume resume);
 
-    protected abstract Resume get(int index);
+    protected abstract Resume doGet(Object key);
 
     protected abstract Object getSearchKey(String uuid);
 

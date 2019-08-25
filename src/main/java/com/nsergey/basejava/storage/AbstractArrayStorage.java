@@ -28,8 +28,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume get(int index) {
-        return storage[index];
+    protected Resume doGet(Object key) {
+        return storage[(Integer) key];
     }
 
     public int size() {

@@ -12,8 +12,8 @@ public class ListStorage extends AbstractStorage {
     private List<Resume> storage = new ArrayList<>();
 
     @Override
-    protected Resume get(int index) {
-        return storage.get(index);
+    protected Resume doGet(Object key) {
+        return storage.get((Integer) key);
     }
 
     @Override

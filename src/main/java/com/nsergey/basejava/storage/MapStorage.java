@@ -35,7 +35,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume get(int index) {
+    protected Resume doGet(Object key) {
         return null;
     }
 
