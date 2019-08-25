@@ -13,13 +13,15 @@ public abstract class AbstractStorage implements Storage {
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
 
-        int index = indexOf(resume.getUuid());
-        if (index >= 0) {
+        Object key = getSearchKey(resume.getUuid());
+        if (isExist(key)) {
             throw new ExistStorageException(resume.getUuid());
         }
 
-        add(resume);
+        doAdd(resume, key);
     }
+
+    protected abstract boolean isExist(Object key);
 
     public Resume get(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
@@ -55,9 +57,12 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract Resume get(int index);
 
+    protected abstract Object getSearchKey(String uuid);
+
+    @Deprecated
     protected abstract int indexOf(String uuid);
 
-    protected abstract void add(Resume resume);
+    protected abstract void doAdd(Resume resume, Object key);
 
 
 }

@@ -40,12 +40,22 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
+    protected boolean isExist(Object key) {
+        return false;
+    }
+
+    @Override
+    protected Object getSearchKey(String uuid) {
+        return null;
+    }
+
+    @Override
     protected int indexOf(String uuid) {
         return storage.indexOf(new Resume(uuid));
     }
 
     @Override
-    protected void add(Resume resume) {
+    protected void doAdd(Resume resume, Object key) {
         storage.add(resume);
     }
 

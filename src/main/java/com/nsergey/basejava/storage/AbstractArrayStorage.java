@@ -12,6 +12,7 @@ import com.nsergey.basejava.model.Resume;
  */
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int CAPACITY = 10000;
+    protected static final int NOT_FOUND = -1;
 
     protected Resume[] storage = new Resume[CAPACITY];
     protected int size = 0;
@@ -57,6 +58,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         } else {
             storage[index] = resume;
         }
+    }
+
+    @Override
+    protected boolean isExist(Object key) {
+        return key == null || (Integer) key >= 0;
     }
 
 }

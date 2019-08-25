@@ -7,6 +7,12 @@ import com.nsergey.basejava.model.Resume;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
+    protected Object getSearchKey(String uuid) {
+        int index = Arrays.binarySearch(getAll(), new Resume(uuid));
+        return index >= 0 ? index : NOT_FOUND;
+    }
+
+    @Override
     protected int indexOf(String uuid) {
         int index = Arrays.binarySearch(getAll(), new Resume(uuid));
         return index >= 0 ? index : NOT_FOUND;
@@ -21,7 +27,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void add(Resume resume) {
+    protected void doAdd(Resume resume, Object key) {
         //  http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
         int index = Arrays.binarySearch(getAll(), resume);
         if (index < 0) {

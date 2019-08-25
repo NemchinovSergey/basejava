@@ -45,7 +45,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void add(Resume resume) {
+    protected void doAdd(Resume resume, Object key) {
 
     }
 
@@ -57,5 +57,15 @@ public class MapStorage extends AbstractStorage {
     @Override
     public int size() {
         return 0;
+    }
+
+    @Override
+    protected boolean isExist(Object key) {
+        return false;
+    }
+
+    @Override
+    protected Object getSearchKey(String uuid) {
+        return null;
     }
 }
