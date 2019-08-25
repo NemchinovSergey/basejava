@@ -10,21 +10,10 @@ import com.nsergey.basejava.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void delete(int index) {
-        storage[index] = storage[size - 1];
+    protected void doDelete(Object key) {
+        storage[(int) key] = storage[size - 1];
         storage[size - 1] = null;
         size--;
-    }
-
-    @Override
-    protected Object getSearchKey(String uuid) {
-        for (int index = 0; index < size; index++) {
-            Resume r = storage[index];
-            if (Objects.equals(r.getUuid(), uuid)) {
-                return index;
-            }
-        }
-        return NOT_FOUND;
     }
 
     @Override

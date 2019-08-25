@@ -25,7 +25,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void delete(int index) {
+    protected void doDelete(Object key) {
 
     }
 
@@ -37,11 +37,6 @@ public class MapStorage extends AbstractStorage {
     @Override
     protected Resume doGet(Object key) {
         return null;
-    }
-
-    @Override
-    protected int indexOf(String uuid) {
-        return 0;
     }
 
     @Override

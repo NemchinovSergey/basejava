@@ -8,8 +8,6 @@ import com.nsergey.basejava.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-    protected static final int NOT_FOUND = -1;
-
     public void save(Resume resume) {
         Objects.requireNonNull(resume, "Resume is null");
 
@@ -37,15 +35,15 @@ public abstract class AbstractStorage implements Storage {
     public void delete(String uuid) {
         Objects.requireNonNull(uuid, "uuid is null");
 
-        int index = indexOf(uuid);
-        if (index == NOT_FOUND) {
+        Object key = getSearchKey(uuid);
+        if (!isExist(key)) {
             throw new NotExistStorageException(uuid);
         } else {
-            delete(index);
+            doDelete(key);
         }
     }
 
-    protected abstract void delete(int index);
+    protected abstract void doDelete(Object key);
 
     public abstract int size();
 
@@ -58,9 +56,6 @@ public abstract class AbstractStorage implements Storage {
     protected abstract Resume doGet(Object key);
 
     protected abstract Object getSearchKey(String uuid);
-
-    @Deprecated
-    protected abstract int indexOf(String uuid);
 
     protected abstract void doAdd(Resume resume, Object key);
 

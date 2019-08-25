@@ -7,21 +7,16 @@ import com.nsergey.basejava.model.Resume;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected Object getSearchKey(String uuid) {
-        int index = Arrays.binarySearch(getAll(), new Resume(uuid));
-        return index >= 0 ? index : NOT_FOUND;
-    }
-
-    @Override
     protected int indexOf(String uuid) {
         int index = Arrays.binarySearch(getAll(), new Resume(uuid));
         return index >= 0 ? index : NOT_FOUND;
     }
 
     @Override
-    protected void delete(int index) {
-        storage[index] = null; // to help GC
-        System.arraycopy(storage, index + 1, storage, index, size - index - 1);
+    protected void doDelete(Object key) {
+        int intKey = (int) key;
+        storage[intKey] = null; // to help GC
+        System.arraycopy(storage, intKey + 1, storage, intKey, size - intKey - 1);
         storage[size - 1] = null;
         size--;
     }

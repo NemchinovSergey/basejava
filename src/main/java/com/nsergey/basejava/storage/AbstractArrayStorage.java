@@ -61,6 +61,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
+    protected Object getSearchKey(String uuid) {
+        return indexOf(uuid);
+    }
+
+    protected abstract int indexOf(String uuid);
+
+    @Override
     protected boolean isExist(Object key) {
         return key == null || (Integer) key >= 0;
     }

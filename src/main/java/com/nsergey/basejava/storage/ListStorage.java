@@ -22,16 +22,16 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void delete(int index) {
-        storage.remove(index);
+    protected void doDelete(Object key) {
+        storage.remove(key);
     }
 
     @Override
     public void update(Resume resume) {
         Objects.requireNonNull(resume, "uuid is null");
 
-        int index = indexOf(resume.getUuid());
-        if (index == NOT_FOUND) {
+        int index = (int) getSearchKey(resume.getUuid());
+        if (index < 0) {
             throw new NotExistStorageException(resume.getUuid());
         } else {
             storage.remove(index);
@@ -46,11 +46,6 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected Object getSearchKey(String uuid) {
-        return null;
-    }
-
-    @Override
-    protected int indexOf(String uuid) {
         return storage.indexOf(new Resume(uuid));
     }
 
