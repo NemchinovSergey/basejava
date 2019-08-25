@@ -64,7 +64,9 @@ abstract class AbstractStorageTest {
     @Test
     void get() {
         String uuid = "uuid10";
-        assertEquals(uuid, storage.get(uuid).getUuid());
+        Resume resume = storage.get(uuid);
+        assertNotNull(resume);
+        assertEquals(uuid, resume.getUuid());
     }
 
     @Test
@@ -81,8 +83,11 @@ abstract class AbstractStorageTest {
 
     @Test
     void getAll() {
+        assertTrue(storage.size() > 0);
+
         Resume[] resumes = storage.getAll();
         assertNotNull(resumes);
+        assertTrue(resumes.length > 0);
         assertEquals(storage.size(), resumes.length);
     }
 
