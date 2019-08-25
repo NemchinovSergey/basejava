@@ -21,7 +21,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doDelete(Object key) {
-        storage.remove(key);
+        storage.remove((int)key);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object key) {
-        return false;
+        return key != null && (Integer) key >= 0;
     }
 
     @Override
