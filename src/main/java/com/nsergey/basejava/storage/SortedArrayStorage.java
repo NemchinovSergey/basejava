@@ -1,15 +1,18 @@
 package com.nsergey.basejava.storage;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import com.nsergey.basejava.model.Resume;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
 
+    private static final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getUuid);
+
     @Override
     protected void doAdd(Resume resume, Object key) {
         //  http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
-        int index = Arrays.binarySearch(getAll(), resume);
+        int index = Arrays.binarySearch(getAll(), resume, RESUME_COMPARATOR);
         if (index < 0) {
             int pos = -index - 1;
             System.arraycopy(storage, pos, storage, pos + 1, size - pos);
@@ -20,7 +23,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int indexOf(String uuid) {
-        int index = Arrays.binarySearch(getAll(), new Resume(uuid));
+        int index = Arrays.binarySearch(getAll(), new Resume(uuid), RESUME_COMPARATOR);
         return index >= 0 ? index : NOT_FOUND;
     }
 
