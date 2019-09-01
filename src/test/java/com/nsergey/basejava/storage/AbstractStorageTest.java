@@ -27,7 +27,7 @@ abstract class AbstractStorageTest {
 
     // sorted array of resumes
     private static final Resume[] resumesArr = IntStream.range(1, INITIAL_SIZE + 1)
-                                                        .mapToObj(n -> new Resume("uuid" + n))
+                                                        .mapToObj(n -> new Resume("uuid" + n, "name" + n))
                                                         .toArray(Resume[]::new);
 
     AbstractStorageTest(AbstractStorage storage) {
@@ -56,7 +56,7 @@ abstract class AbstractStorageTest {
         String uuid = "some-test-uuid";
         assertThrows(NotExistStorageException.class, () -> storage.get(uuid));
 
-        storage.save(new Resume(uuid));
+        storage.save(new Resume(uuid, "some-name"));
 
         assertEquals(uuid, storage.get(uuid).getUuid());
     }
@@ -117,7 +117,7 @@ abstract class AbstractStorageTest {
 
         int size = storage.size();
 
-        assertThrows(ExistStorageException.class, () -> storage.save(new Resume(uuid)));
+        assertThrows(ExistStorageException.class, () -> storage.save(new Resume(uuid, "some-name")));
         assertNotNull(storage.get(uuid));
         assertEquals(size, storage.size());
     }
@@ -128,7 +128,7 @@ abstract class AbstractStorageTest {
         Resume oldResume = storage.get(uuid);
         assertNotNull(oldResume);
 
-        Resume newResume = new Resume(uuid);
+        Resume newResume = new Resume(uuid, "NewName");
         storage.update(newResume);
 
         assertNotSame(oldResume, newResume);
