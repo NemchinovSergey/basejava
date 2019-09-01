@@ -1,6 +1,9 @@
 package com.nsergey.basejava.storage;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.nsergey.basejava.model.Resume;
 
@@ -31,6 +34,13 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return NOT_FOUND;
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        return Stream.of(getArray())
+                     .sorted(RESUME_UUID_COMPARATOR)
+                     .collect(Collectors.toList());
     }
 
 }

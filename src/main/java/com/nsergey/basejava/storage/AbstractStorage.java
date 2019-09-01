@@ -1,5 +1,7 @@
 package com.nsergey.basejava.storage;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 import com.nsergey.basejava.exception.ExistStorageException;
@@ -7,6 +9,8 @@ import com.nsergey.basejava.exception.NotExistStorageException;
 import com.nsergey.basejava.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
+
+    protected static final Comparator<Resume> RESUME_UUID_COMPARATOR = Comparator.comparing(Resume::getUuid);
 
     protected abstract Object getSearchKey(String uuid);
 
@@ -27,7 +31,7 @@ public abstract class AbstractStorage implements Storage {
     public abstract void clear();
 
     @Override
-    public abstract Resume[] getAll();
+    public abstract List<Resume> getAllSorted();
 
     @Override
     public void save(Resume resume) {

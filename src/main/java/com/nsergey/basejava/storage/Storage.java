@@ -1,11 +1,12 @@
 package com.nsergey.basejava.storage;
 
+import java.util.List;
+
 import com.nsergey.basejava.model.Resume;
 
 /**
  * Storage Interface
  */
-// TODO refactoring
 public interface Storage {
 
     void clear();
@@ -18,13 +19,7 @@ public interface Storage {
 
     void update(Resume resume);
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    Resume[] getAll();
-
-    //  return list, sorted by name
-    //  List<Resume> getAllSorted();
+    List<Resume> getAllSorted();
 
     int size();
 }

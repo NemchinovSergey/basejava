@@ -1,7 +1,9 @@
 package com.nsergey.basejava.storage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.nsergey.basejava.model.Resume;
 
@@ -58,7 +60,10 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return storage.values().toArray(new Resume[0]);
+    public List<Resume> getAllSorted() {
+        return storage.values()
+                      .stream()
+                      .sorted(RESUME_UUID_COMPARATOR)
+                      .collect(Collectors.toList());
     }
 }

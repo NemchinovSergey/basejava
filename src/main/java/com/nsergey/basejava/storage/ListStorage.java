@@ -2,6 +2,7 @@ package com.nsergey.basejava.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.nsergey.basejava.model.Resume;
 
@@ -54,8 +55,10 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return storage.toArray(new Resume[] {});
+    public List<Resume> getAllSorted() {
+        return storage.stream()
+                      .sorted(RESUME_UUID_COMPARATOR)
+                      .collect(Collectors.toList());
     }
 
     @Override
