@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 
 import com.nsergey.basejava.model.Resume;
 
-public class MapStorage extends AbstractStorage {
+public class MapUuidStorage extends AbstractStorage {
 
     private final Map<String, Resume> storage;
 
-    public MapStorage() {
+    public MapUuidStorage() {
         storage = new HashMap<>();
     }
 
-    public MapStorage(Map<String, Resume> storage) {
+    public MapUuidStorage(Map<String, Resume> storage) {
         this.storage = storage;
     }
 

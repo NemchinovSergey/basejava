@@ -21,7 +21,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int indexOf(String uuid) {
-        int index = Arrays.binarySearch(getArray(), new Resume(uuid), RESUME_UUID_COMPARATOR);
+        int index = Arrays.binarySearch(getArray(), new Resume(uuid, "dummy"), RESUME_UUID_COMPARATOR);
         return index >= 0 ? index : NOT_FOUND;
     }
 

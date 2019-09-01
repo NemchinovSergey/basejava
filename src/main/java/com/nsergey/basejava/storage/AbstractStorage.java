@@ -12,6 +12,9 @@ public abstract class AbstractStorage implements Storage {
 
     protected static final Comparator<Resume> RESUME_UUID_COMPARATOR = Comparator.comparing(Resume::getUuid);
 
+    protected static final Comparator<Resume> RESUME_FULL_NAME_COMPARATOR = Comparator.comparing(Resume::getFullName)
+                                                                                      .thenComparing(Resume::getUuid);
+
     protected abstract Object getSearchKey(String uuid);
 
     protected abstract boolean isExist(Object key);
