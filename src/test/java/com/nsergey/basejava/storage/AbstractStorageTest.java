@@ -21,16 +21,16 @@ import org.junit.jupiter.api.Test;
 
 abstract class AbstractStorageTest {
 
-    private static final int INITIAL_SIZE = 1000;
+    private static final int INITIAL_SIZE = 10;
 
-    protected final AbstractStorage storage;
+    protected final Storage storage;
 
     // sorted array of resumes
     private static final Resume[] resumesArr = IntStream.range(1, INITIAL_SIZE + 1)
                                                         .mapToObj(n -> new Resume("uuid" + n, "name" + n))
                                                         .toArray(Resume[]::new);
 
-    AbstractStorageTest(AbstractStorage storage) {
+    AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
