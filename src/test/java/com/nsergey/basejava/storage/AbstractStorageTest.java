@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 abstract class AbstractStorageTest {
 
-    private static final int INITIAL_SIZE = 10;
+    private static final int INITIAL_SIZE = 9;
 
     protected final Storage storage;
 
@@ -63,7 +63,7 @@ abstract class AbstractStorageTest {
 
     @Test
     void get() {
-        String uuid = "uuid10";
+        String uuid = "uuid5";
         Resume resume = storage.get(uuid);
         assertNotNull(resume);
         assertEquals(uuid, resume.getUuid());
@@ -71,7 +71,7 @@ abstract class AbstractStorageTest {
 
     @Test
     void delete() {
-        String uuid = "uuid10";
+        String uuid = "uuid5";
         int size = storage.size();
         assertNotNull(storage.get(uuid));
 
@@ -82,13 +82,19 @@ abstract class AbstractStorageTest {
     }
 
     @Test
-    void getAll() {
+    void getAllSorted() {
         assertTrue(storage.size() > 0);
 
         List<Resume> resumes = storage.getAllSorted();
         assertNotNull(resumes);
         assertTrue(resumes.size() > 0);
         assertEquals(storage.size(), resumes.size());
+
+        assertEquals(new Resume("uuid1", "name1"), resumes.get(0));
+        assertEquals(new Resume("uuid2", "name2"), resumes.get(1));
+        assertEquals(new Resume("uuid3", "name3"), resumes.get(2));
+        assertEquals(new Resume("uuid4", "name4"), resumes.get(3));
+        assertEquals(new Resume("uuid5", "name5"), resumes.get(4));
     }
 
     @Test
@@ -112,7 +118,7 @@ abstract class AbstractStorageTest {
 
     @Test
     void testSaveDuplicates() {
-        String uuid = "uuid10";
+        String uuid = "uuid5";
         assertNotNull(storage.get(uuid));
 
         int size = storage.size();
@@ -124,7 +130,7 @@ abstract class AbstractStorageTest {
 
     @Test
     void update() {
-        String uuid = "uuid10";
+        String uuid = "uuid5";
         Resume oldResume = storage.get(uuid);
         assertNotNull(oldResume);
 
