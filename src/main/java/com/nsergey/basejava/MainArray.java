@@ -19,15 +19,15 @@ public class MainArray {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
-            System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | update uuid | clear | exit): ");
+            System.out.print("Введите одну из команд - (list | save name | delete uuid | get uuid | update uuid fullName | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
-            if (params.length < 1 || params.length > 2) {
+            if (params.length < 1 || params.length > 3) {
                 System.out.println("Неверная команда.");
                 continue;
             }
-            String uuid = null;
-            if (params.length == 2) {
-                uuid = params[1].intern();
+            String value = null;
+            if (params.length >= 2) {
+                value = params[1].intern();
             }
             switch (params[0]) {
                 case "list":
@@ -37,18 +37,18 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    ARRAY_STORAGE.save(new Resume(uuid));
+                    ARRAY_STORAGE.save(new Resume(value));
                     printAll();
                     break;
                 case "delete":
-                    ARRAY_STORAGE.delete(uuid);
+                    ARRAY_STORAGE.delete(value);
                     printAll();
                     break;
                 case "get":
-                    System.out.println(ARRAY_STORAGE.get(uuid));
+                    System.out.println(ARRAY_STORAGE.get(value));
                     break;
                 case "update":
-                    ARRAY_STORAGE.update(new Resume(uuid));
+                    ARRAY_STORAGE.update(new Resume(value, params[2]));
                     printAll();
                     break;
                 case "clear":
