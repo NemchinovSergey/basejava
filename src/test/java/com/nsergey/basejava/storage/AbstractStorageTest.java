@@ -85,10 +85,10 @@ abstract class AbstractStorageTest {
     void getAll() {
         assertTrue(storage.size() > 0);
 
-        Resume[] resumes = storage.getAll();
+        List<Resume> resumes = storage.getAllSorted();
         assertNotNull(resumes);
-        assertTrue(resumes.length > 0);
-        assertEquals(storage.size(), resumes.length);
+        assertTrue(resumes.size() > 0);
+        assertEquals(storage.size(), resumes.size());
     }
 
     @Test
