@@ -6,12 +6,16 @@ import java.util.UUID;
 /**
  * Initial resume class
  */
-public class Resume {
+public class Resume implements Comparable<Resume> {
 
-    /** Unique identifier of Resume */
+    /**
+     * Unique identifier of Resume
+     */
     private final String uuid;
 
-    /** Full name of a candidate */
+    /**
+     * Full name of a candidate
+     */
     private final String fullName;
 
     public Resume(String fullName) {
@@ -58,5 +62,11 @@ public class Resume {
     @Override
     public String toString() {
         return "Resume{uuid='" + uuid + "', fullName='" + fullName + "'}";
+    }
+
+    @Override
+    public int compareTo(Resume o) {
+        int result = this.fullName.compareTo(o.fullName);
+        return result != 0 ? result : this.uuid.compareTo(o.uuid);
     }
 }

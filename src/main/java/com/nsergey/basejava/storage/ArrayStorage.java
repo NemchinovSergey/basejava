@@ -39,7 +39,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public List<Resume> getAllSorted() {
         return Stream.of(getArray())
-                     .sorted(RESUME_UUID_COMPARATOR)
+                     .sorted()
                      .collect(Collectors.toList());
     }
 

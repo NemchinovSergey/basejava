@@ -62,7 +62,7 @@ public class ListStorage extends AbstractStorage {
     @Override
     public List<Resume> getAllSorted() {
         return storage.stream()
-                      .sorted(RESUME_UUID_COMPARATOR)
+                      .sorted()
                       .collect(Collectors.toList());
     }
 
