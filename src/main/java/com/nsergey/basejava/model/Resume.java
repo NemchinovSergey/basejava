@@ -22,8 +22,21 @@ public class Resume {
         this.uuid = Objects.requireNonNull(uuid, "uuid is null");
     }
 
+    public Resume(String uuid, String fullName) {
+        this.uuid = Objects.requireNonNull(uuid, "uuid is null");
+        this.fullName = Objects.requireNonNull(fullName, "Full Name is null");
+    }
+
     public String getUuid() {
         return uuid;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Override
