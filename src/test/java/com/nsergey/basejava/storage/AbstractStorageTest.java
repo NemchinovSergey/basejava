@@ -90,11 +90,12 @@ abstract class AbstractStorageTest {
         assertTrue(resumes.size() > 0);
         assertEquals(storage.size(), resumes.size());
 
-        assertEquals(new Resume("uuid1", "name1"), resumes.get(0));
-        assertEquals(new Resume("uuid2", "name2"), resumes.get(1));
-        assertEquals(new Resume("uuid3", "name3"), resumes.get(2));
-        assertEquals(new Resume("uuid4", "name4"), resumes.get(3));
-        assertEquals(new Resume("uuid5", "name5"), resumes.get(4));
+        List<Resume> expected = Arrays.asList(new Resume("uuid1", "name1"),
+                                              new Resume("uuid2", "name2"),
+                                              new Resume("uuid3", "name3"),
+                                              new Resume("uuid4", "name4"),
+                                              new Resume("uuid5", "name5"));
+        assertEquals(expected, resumes.subList(0, 5));
     }
 
     @Test
