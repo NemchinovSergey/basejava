@@ -9,7 +9,7 @@ import com.nsergey.basejava.model.Resume;
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected static final int CAPACITY = 10000;
     protected static final int NOT_FOUND = -1;
 
@@ -34,23 +34,23 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         return indexOf(uuid);
     }
 
     @Override
-    protected boolean isExist(Object key) {
-        return key != null && (Integer) key >= 0;
+    protected boolean isExist(Integer index) {
+        return index != null && index >= 0;
     }
 
     @Override
-    protected Resume doGet(Object key) {
-        return storage[(Integer) key];
+    protected Resume doGet(Integer index) {
+        return storage[index];
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object key) {
-        storage[(int) key] = resume;
+    protected void doUpdate(Resume resume, Integer index) {
+        storage[index] = resume;
     }
 
     @Override

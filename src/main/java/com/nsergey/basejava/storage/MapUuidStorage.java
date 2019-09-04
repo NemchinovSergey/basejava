@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import com.nsergey.basejava.model.Resume;
 
-public class MapUuidStorage extends AbstractStorage {
+public class MapUuidStorage extends AbstractStorage<String> {
 
     private final Map<String, Resume> storage;
 
@@ -20,33 +20,33 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected String getSearchKey(String uuid) {
         return uuid;
     }
 
     @Override
-    protected boolean isExist(Object key) {
-        return storage.containsKey((String)key);
+    protected boolean isExist(String key) {
+        return storage.containsKey(key);
     }
 
     @Override
-    protected void doAdd(Resume resume, Object key) {
+    protected void doAdd(Resume resume, String key) {
         storage.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected Resume doGet(Object key) {
-        return storage.get((String)key);
+    protected Resume doGet(String key) {
+        return storage.get(key);
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object key) {
+    protected void doUpdate(Resume resume, String key) {
         storage.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected void doDelete(Object key) {
-        storage.remove((String)key);
+    protected void doDelete(String key) {
+        storage.remove(key);
     }
 
     @Override

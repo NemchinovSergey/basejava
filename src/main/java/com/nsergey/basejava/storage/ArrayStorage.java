@@ -13,14 +13,14 @@ import com.nsergey.basejava.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void doAdd(Resume resume, Object key) {
+    protected void doAdd(Resume resume, Integer index) {
         storage[size] = resume;
         size++;
     }
 
     @Override
-    protected void doDelete(Object key) {
-        storage[(int) key] = storage[size - 1];
+    protected void doDelete(Integer index) {
+        storage[index] = storage[size - 1];
         storage[size - 1] = null;
         size--;
     }

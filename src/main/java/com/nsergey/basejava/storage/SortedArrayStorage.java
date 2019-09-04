@@ -8,7 +8,7 @@ import com.nsergey.basejava.model.Resume;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void doAdd(Resume resume, Object key) {
+    protected void doAdd(Resume resume, Integer ignored) {
         //  http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
         int index = Arrays.binarySearch(getArray(), resume, RESUME_UUID_COMPARATOR);
         if (index < 0) {
@@ -26,10 +26,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void doDelete(Object key) {
-        int intKey = (int) key;
-        storage[intKey] = null; // to help GC
-        System.arraycopy(storage, intKey + 1, storage, intKey, size - intKey - 1);
+    protected void doDelete(Integer index) {
+        storage[index] = null; // to help GC
+        System.arraycopy(storage, index + 1, storage, index, size - index - 1);
         storage[size - 1] = null;
         size--;
     }
