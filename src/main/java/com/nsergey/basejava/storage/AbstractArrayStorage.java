@@ -5,11 +5,16 @@ import java.util.Objects;
 
 import com.nsergey.basejava.exception.StorageException;
 import com.nsergey.basejava.model.Resume;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Array based storage for Resumes
  */
 public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
+
+    private final static Logger LOG = LogManager.getLogger(AbstractArrayStorage.class.getSimpleName());
+
     protected static final int CAPACITY = 100;
     protected static final int NOT_FOUND = -1;
 
@@ -24,6 +29,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     public void save(Resume resume) {
+        LOG.info("Save resume: {}", resume);
         Objects.requireNonNull(resume, "Resume is null");
 
         if (size >= CAPACITY) {
@@ -55,16 +61,19 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     public int size() {
+        LOG.debug("Get size");
         return size;
     }
 
     @Override
     public void clear() {
+        LOG.debug("Clear storage");
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     Resume[] getArray() {
+        LOG.debug("Get array of resume");
         return Arrays.copyOfRange(storage, 0, size);
     }
 
