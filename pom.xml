@@ -12,11 +12,26 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
+        <!-- logging -->
+        <log4j-api.version>2.12.0</log4j-api.version>
+
         <!-- testing -->
         <junit-jupiter.version>5.5.1</junit-jupiter.version>
     </properties>
 
     <dependencies>
+        <!-- logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+
         <!-- testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
